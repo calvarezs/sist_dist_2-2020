@@ -3,3 +3,6 @@ Trabajo de Catedra para Sistemas Distribuidos 2°Sem 2020 - Integrantes:  Carlos
 
 Para ejecutar correr comando
 npm run watch
+
+
+Se usa rut.js para verificar el rut chileno
