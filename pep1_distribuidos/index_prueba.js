@@ -1,19 +1,19 @@
 const express = require('express')
 const Sequelize = require('sequelize')
+const sequelize = new Sequelize('postgres://project_distr:pass@example.com:5432/project_distr')
 
 const app = express()
-
 const port = 3000
 
+//Middlewares
 app.use(express.json());
 
 app.get('/', (req, res) => res.json({ message: 'Hello World' }))
 
 
-const sequelize = new Sequelize('postgres://project_distr:pass@example.com:5432/project_distr')
-
-
 // Establecer conexion
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
 sequelize.authenticate()
 
 .then(() => {
@@ -27,8 +27,6 @@ console.log('Connection has been established successfully.');
 console.error('Unable to connect to the database:', err);
 
 });
-
-
 
 
 // Definir modelo de base de datos
@@ -63,7 +61,6 @@ type: Sequelize.STRING
 // Note: using `force: true` will drop the table if it already exists
 
 User.sync({ force: true }) // Now the `users` table in the database corresponds to the model definition
-
 
 
 // Escribir usuario en base de datos
@@ -115,6 +112,4 @@ console.error(error)
 
 })
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 

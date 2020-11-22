@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const { validate, clean, format } = require('rut.js')
+const personController = require('../controllers/personController');
+const permissionController = require('../controllers/permissionController');
 
 
 router.get('/', (req, res) => {
@@ -42,6 +44,14 @@ router.post('/',
     	}
   	}
 );
+
+
+
+router.use('/persons', personController);
+router.use('/permissions', permissionController);
+
+
+
 
 
 module.exports = router;
