@@ -1,7 +1,7 @@
 # **sist_dist_2-2020**
 ## Trabajo de Cátedra para Sistemas Distribuidos 2°Sem 2020
-##- Integrantes:  Carlos Alvarez - Vicente Brevis
-##- Profesor: Arturo Terra Vásquez
+## - Integrantes:  Carlos Alvarez - Vicente Brevis
+## - Profesor: Arturo Terra Vásquez
 ---
 ## Librerías utilizadas
 * Se utiliza *Node.js* para el módulo de backend por su facilidad de uso, la gran cantidad de material de apoyo y la posibilidad de incluir una gran variedad de librerías para añadir características al programa final, lo que será de utilidad en la siguiente parte de la evaluación.
@@ -15,8 +15,8 @@
 * Se utiliza *sequalize* como interfaz para manejar la base de datos en postgresql.
 ---
 ## Instrucciones de uso
-Para ejecutar en modo de desarrollo usar el comando ***"npm run watch"*** , esto ejecutará el programa en la página [https://localhost:3000](https://localhost:3000), al mismo tiempo la herramienta  *nodemon* buscará cambios en los archivos y "recompilar" la aplicación con los nuevos cambios.
-Se debe crear una base de datos en postgresql de forma manual, las credenciales de la base de datos creada se debe cambiar en el archivo "src/config/database.js". Para crear las tablas se utilizan los siguientes comandos:
+Para ejecutar en modo de desarrollo usar el comando ***"npm run watch"*** , esto ejecutará el programa en la página [*https://localhost:3000*](https://localhost:3000), al mismo tiempo la herramienta  *nodemon* buscará cambios en los archivos y "recompilar" la aplicación con los nuevos cambios.
+Se debe crear una base de datos en postgresql de forma manual, las credenciales de la base de datos creada se debe cambiar en el archivo *"src/config/database.js"*. Para crear las tablas se utilizan los siguientes comandos:
 ```
 CREATE TABLE IF NOT EXISTS PERSON(
 FIRSTNAME TEXT         NOT NULL,
