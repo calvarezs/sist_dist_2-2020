@@ -14,10 +14,9 @@ router.post('/add', async(req, res) => {
         const {
             rut,
             motivo,
-            date_ext,
             adress
         } = req.body;
-        const permission = await Permission.create({rut, motivo, date_ext, adress})
+        const permission = await Permission.create({rut, motivo, adress})
         return res.json(permission);   
     }
     catch(err){

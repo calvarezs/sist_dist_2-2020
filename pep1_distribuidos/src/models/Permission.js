@@ -16,12 +16,13 @@ const Permission = db.define('permission', {
     motivo: {
         type: Sequelize.STRING
     },
-    date_ext: {
-        type: Sequelize.DATE,
-        allowNull: false
-    },
     adress: {
         type: Sequelize.STRING,
+        allowNull: false
+    },
+    date_ext: {
+        type: 'TIMESTAMP',
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP + (30 * interval \'1 minute\')'),
         allowNull: false
     }
 },{timestamps: false});
