@@ -13,23 +13,25 @@
 * Se usa *rut.js* para sanitizar y validar una entrada de rut chileno, se utiliza como parte de funciones customizadas con express-validator.
 * Se utiliza *Bootstrap* para otorgar
 * Se utiliza *sequalize* como interfaz para manejar la base de datos en postgresql.
+* Se utiliza *server.js* para el envío de correo electrónico.
 ---
 ## Instrucciones de uso
 Para ejecutar en modo de desarrollo usar el comando ***"npm run watch"*** , esto ejecutará el programa en la página [*https://localhost:3000*](https://localhost:3000), al mismo tiempo la herramienta  *nodemon* buscará cambios en los archivos y "recompilar" la aplicación con los nuevos cambios.
 Se debe crear una base de datos en postgresql de forma manual, las credenciales de la base de datos creada se debe cambiar en el archivo *"src/config/database.js"*. Para crear las tablas se utilizan los siguientes comandos:
 ```
-CREATE TABLE IF NOT EXISTS PERSON(
-FIRSTNAME TEXT         NOT NULL,
-EMAIL     TEXT         NOT NULL,
-RUT     TEXT         NOT NULL,
-ADRESS    TEXT         NOT NULL
+CREATE TABLE IF NOT EXISTS PEOPLE( 
+	RUT 	  TEXT             NOT NULL,
+	FIRSTNAME TEXT             NOT NULL,
+	EMAIL     TEXT             NOT NULL,
+	ADRESS    TEXT             NOT NULL
 );
-CREATE TABLE IF NOT EXISTS PERMISSION(
-ID INT PRIMARY KEY     NOT NULL,
-RUT    TEXT          NOT NULL,
-MOTIVO   TEXT          NOT NULL,
-DATE_EXT TIMESTAMP     NOT NULL,
-ADRESS   TEXT          NOT NULL
+
+CREATE TABLE IF NOT EXISTS PERMISSIONS(
+	ID SERIAL PRIMARY KEY,
+	RUT 	 TEXT          NOT NULL,
+	MOTIVO   TEXT          NOT NULL,
+	DATE_EXT TIMESTAMP     NOT NULL,
+	ADRESS   TEXT          NOT NULL
 );
 ```
 ---

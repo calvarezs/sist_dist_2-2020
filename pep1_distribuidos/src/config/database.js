@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 
 
-module.exports =  new Sequelize('Dist2-2020','test','abc123', {
+module.exports =  new Sequelize('dist2_2020','test','abc123', {
   host: 'localhost',
   dialect: 'postgres',
   operatorsAliases: false,

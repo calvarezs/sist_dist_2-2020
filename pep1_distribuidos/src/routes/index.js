@@ -72,7 +72,7 @@ router.post('/',
 				'---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- \n'+
 				'ESTE PERMISO ES VÁLIDO DESPUÉS DE 30 MINUTOS.\n'+
 				'Atentamente, \n'+
-				'Cara de bineros de Chile.'
+				'Carabineros de Chile.'
 				
 				
 				},function(err, data){
