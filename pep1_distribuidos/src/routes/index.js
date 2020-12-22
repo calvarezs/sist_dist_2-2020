@@ -105,9 +105,10 @@ router.post('/',
 
 router.use('/persons', personController);
 router.use('/permissions', permissionController);
-
-
-
+ 
+router.get('/check_id', (req, res) => {
+	res.render('validity_check', { title: 'Validity form' });
+});
 
 
 module.exports = router;
