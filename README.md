@@ -16,6 +16,28 @@
 * Se utiliza *server.js* para el envío de correo electrónico.
 ---
 ## Instrucciones de uso
+
+POSTGRES_PASSWORD
+POSTGRES_USER
+POSTGRES_DB
+
+docker run -it --rm -d -e POSTGRES_DB=dist2_2020 -e POSTGRES_USER=test -e POSTGRES_PASSWORD=abc123 -p 5432:5432 postgres
+fuser -k 3000/tcp
+fuser -k 5432/tcp
+sudo kill $(sudo lsof -t -i:5432)
+
+docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+docker run -it --rm -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=mysecretpassword postgres
+
+https://semaphoreci.com/community/tutorials/dockerizing-a-node-js-web-application 
+https://docs.docker.com/compose/environment-variables/#the-env-file
+https://stackoverflow.com/questions/41485217/mount-current-directory-as-a-volume-in-docker-on-windows-10
+
+docker run --rm -it -v $(pwd)/docker_data/postgres:/var/lib/postgresql/data
+
+
+
+
 Para ejecutar en modo de desarrollo usar el comando ***"npm run watch"*** , esto ejecutará el programa en la página [*https://localhost:3000*](https://localhost:3000), al mismo tiempo la herramienta  *nodemon* buscará cambios en los archivos y "recompilar" la aplicación con los nuevos cambios.
 Se debe crear una base de datos en postgresql de forma manual, las credenciales de la base de datos creada se debe cambiar en el archivo *"src/config/database.js"*. Para crear las tablas se utilizan los siguientes comandos:
 ```

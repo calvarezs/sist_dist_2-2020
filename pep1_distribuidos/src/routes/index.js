@@ -57,7 +57,8 @@ router.post('/',
 				console.log(myData);
 				const permission = new Permission(req.body);
 				permission.save()
-				res.send('Permiso solicitado, revise su correo!');
+				//res.send('Permiso solicitado, revise su correo!');
+				//res.render('message', { msg: 'Permiso solicitado, revise su correo!' });
 
 				transporter.sendMail({
 				from: 'nreply.confrmat1on@gmail.com',
@@ -86,10 +87,12 @@ router.post('/',
 
 
 			}catch(er){
-				res.send('Lo sentimos! Algo fue mal con el registro.'); 
+				//res.send('Lo sentimos! Algo fue mal con el registro.');  
+				res.render('message', { msg: 'Lo sentimos! Algo fue mal con el registro.' });
 				console.log(er);
 			}			
       		//res.send('Se ha enviado el formulario. El resultado se mostrará en breve.');
+			res.render('message', { msg: 'Se ha enviado el formulario. El resultado se mostrará en breve.' });
     	} else {
     		console.log(errors);
       		res.render('form', {
@@ -109,6 +112,40 @@ router.use('/permissions', permissionController);
 router.get('/check_id', (req, res) => {
 	res.render('validity_check', { title: 'Validity form' });
 });
+
+router.post('/check_id', 
+ 	[ 
+	    check('id')
+	    	.not().isEmpty()
+	      	.withMessage('Por favor ingrese un ID de permiso')
+	],
+  	(req, res) => {
+    	const errors = validationResult(req);
+    	if (errors.isEmpty()) {
+			//save id
+			var myData = {
+				id : req.body.id
+			};
+			console.log(myData);
+			
+			try{ 
+				// en esta seccion se solicita a base de datos la informacion relevante y se muestra
+
+			}catch(er){
+				//res.send('Lo sentimos! Algo salio mal.'); 
+				res.render('message', { msg: 'Lo sentimos! Algo salio mal.' });
+
+				console.log(er);
+			}			 
+    	} else {
+    		console.log(errors);
+    		res.render('validity_check', { 
+    			title: 'Validity form',
+        		errors: errors.array(),
+    			 }); 
+    	}
+  	}
+);
 
 
 module.exports = router;

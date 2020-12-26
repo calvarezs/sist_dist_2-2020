@@ -11,7 +11,8 @@ const Person = db.define('person', {
         type: Sequelize.STRING
     },
     rut: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING, 
+        //allowNull: false
         primaryKey: true
     },
     adress: {
