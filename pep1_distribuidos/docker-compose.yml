@@ -1,0 +1,48 @@
+
+version: '3.5'
+services:
+  db:
+    image: 'danieldent/postgres-replication'
+    restart: 'always'
+    environment:
+      POSTGRES_USER: 'test'
+      POSTGRES_PASSWORD: 'abc123'
+      POSTGRES_DB: pep2
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+    volumes:
+     - '/var/lib/postgresql/data'
+    expose:
+     - '5432'
+
+  dbslave:
+    build: '.'
+    image: 'danieldent/postgres-replication'
+    restart: 'always'
+    environment:
+      POSTGRES_USER: 'test'
+      POSTGRES_PASSWORD: 'abc123'
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+      REPLICATE_FROM: 'db'
+    volumes:
+     - '/var/lib/postgresql/data'
+    expose:
+     - '5433'
+    links:
+     - 'db'
+
+  api:
+    build: .
+    command: bash -c "npm install && npm run build && npm start"
+    volumes:
+      - .:/app
+
+    environment:
+      - PASSWORD=c26467982
+      - EMAIL=nreply.confrmat1on@gmail.com
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+volumes:
+  rs1:
+  nodemodules:

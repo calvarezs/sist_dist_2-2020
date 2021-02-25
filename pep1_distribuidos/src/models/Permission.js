@@ -10,8 +10,7 @@ const Permission = db.define('permission', {
     },
     rut: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     motivo: {
         type: Sequelize.STRING
@@ -26,5 +25,8 @@ const Permission = db.define('permission', {
         allowNull: false
     }
 },{timestamps: false});
+
+
+Permission.sync() // Create the table if not exit in DB
 
 module.exports = Permission;

@@ -23,4 +23,5 @@ const Person = db.define('person', {
 Person.hasMany(Permission, {foreignKey: 'rut', sourceKey: 'rut'});
 Permission.belongsTo(Person, {foreignKey: 'rut', sourceKey: 'rut'})
 
+Person.sync() // Create the table if not exit in DB
 module.exports = Person;

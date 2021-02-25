@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 
 
 
-module.exports =  new Sequelize('dist2_2020','test','abc123', {
-  host: 'localhost',
+module.exports =  new Sequelize('pep2','test','abc123', {
+  host: 'db',
   dialect: 'postgres',
   operatorsAliases: false,
 

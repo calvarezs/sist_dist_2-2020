@@ -4,20 +4,27 @@ const Person = require('../models/Person');
 
 
 
+
 router.post('/add', async(req, res) => {
+    const {
+        firstname,
+        email,
+        rut,
+        adress
+    } = req.body;
     try{
-        const {
-            firstname,
-            email,
-            rut,
-            adress
-        } = req.body;
-        const person = await Person.create({firstname, email, rut, adress})
-        return res.json(person);   
+        let person = await Person.create({firstname, email, rut, adress})
+        if (person) {
+            return res.status(200).json({
+            ok: true,
+             message: `Persona con rut: ${person.rut} agregada`,
+            person: person
+            })  
+        }
     }
     catch(err){
         console.log(err);
-        res.status(400).send("Error in save a person");
+        res.status(400).send("Error en agregar persona");
     }
 });
 

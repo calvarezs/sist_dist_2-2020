@@ -1,0 +1,66 @@
+extends layout
+
+block content
+  -data = data || {}
+
+  if errors
+    ul.my-errors
+      for error in errors
+        li= error.msg
+
+  form(action="/permission/add" method="POST" class="form-registration")
+    label(for="inputSolicitud") RUN/DNI:
+    input(
+      type="text"
+      id="rut"
+      name="rut"
+      class="form-control" 
+      placeholder="Ingrese rut"
+      value=data.rut
+    ) 
+      
+    label(for="inputSolicitud") Nombre Completo:
+    input(
+      type="text"
+      id="nombre"
+      name="firstname"
+      class="form-control" 
+      placeholder="Ingrese su nombre completo"
+      value=data.nombre
+    )  
+
+    label(for="inputSolicitud") Dirección:
+    input(
+      type="text"
+      id="direccion"
+      name="adress"
+      class="form-control"
+      placeholder="Ingrese su dirección"
+      value=data.direccion
+    )  
+
+    label(for="inputSolicitud") Motivo:
+    input(
+      type="text"
+      id="motivo"
+      name="motivo"
+      class="form-control"
+      placeholder="Ingrese un motivo"
+      value=data.motivo
+    )  
+
+    label(for="email") Correo electrónico:
+    input(
+      type="email"
+      id="email"
+      name="email"
+      class="form-control"
+      placeholder="Email"
+      value=data.email
+    )
+
+    input(
+      type="submit"
+      value="Envíar"
+      class="btn btn-lg btn-primary btn-block"
+    )
