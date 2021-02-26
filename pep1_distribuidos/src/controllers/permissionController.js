@@ -5,6 +5,7 @@ const Person = require('../models/Person');
 const { check, validationResult } = require('express-validator');
 const { validate, clean, format } = require('rut.js')
 const {PersonController} = require('./personController.js');
+const transporter = require('../server');
 
 router.post('/permission', (req, res) => {
     console.log(req.body);
@@ -82,6 +83,32 @@ router.post('/add', [
         const permission = await Permission.create({rut, motivo, adress})
         if (permission) {
             //return res.json(permission); 
+
+            transporter.sendMail({
+                from: 'nreply.confrmat1on@gmail.com',
+                to: req.body.email,
+                subject: 'Entrega de Permiso temporal',
+                text: 
+                'Sr. (a) '+req.body.firstname+': \n'+
+                'Por este medio confirmamos que su Permiso Temporal fue generado con éxito. \n'+
+                'A continuación una copia de su Permiso: \n'+
+                'Dirección: '+req.body.adress+'\n'+
+                'Motivo: '+req.body.motivo+'\n'+
+                '---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- \n'+
+                'ESTE PERMISO ES VÁLIDO DESPUÉS DE 30 MINUTOS.\n'+
+                'Atentamente, \n'+
+                'Carabineros de Chile.'
+                
+                
+                },function(err, data){
+                    if(err){
+                        console.log('Error Occurs');
+                        console.log(err);
+                    } else{
+                        console.log('Email sent!!!!');
+                    }
+            });
+
             res.render('cond', { title: 'Registration form' });
         }
         else{
