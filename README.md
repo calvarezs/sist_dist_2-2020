@@ -11,12 +11,13 @@
 * Se utiliza el paquete *body-parser* para guardar la información proveniente del formulario y poder enviarla al módulo backend.
 * Se utiliza el módulo *express-validator* para sanitizar y validar la información de entrada en el formulario.
 * Se usa *rut.js* para sanitizar y validar una entrada de rut chileno, se utiliza como parte de funciones customizadas con express-validator.
-* Se utiliza *Bootstrap* para otorgar
+* Se utiliza *Bootstrap* para otorgar un diseño definido para el frontend del programa.
 * Se utiliza *sequalize* como interfaz para manejar la base de datos en postgresql.
 * Se utiliza *server.js* para el envío de correo electrónico.
 ---
 ## Instrucciones de uso
-Para ejecutar en modo de desarrollo usar el comando ***"npm run watch"*** , esto ejecutará el programa en la página [*https://localhost:3000*](https://localhost:3000), al mismo tiempo la herramienta  *nodemon* buscará cambios en los archivos y "recompilar" la aplicación con los nuevos cambios.
+Para ejecutar en modo de desarrollo usar el comando ***"docker-compose up --build"*** , esto ejecutará el programa en la página [*https://localhost:3000*](https://localhost:3000).
+
 Se debe crear una base de datos en postgresql de forma manual, las credenciales de la base de datos creada se debe cambiar en el archivo *"src/config/database.js"*. Para crear las tablas se utilizan los siguientes comandos:
 ```
 CREATE TABLE IF NOT EXISTS PEOPLE( 
@@ -54,3 +55,26 @@ Para hacer el análisis del sistema programado se procede a listar las caracter�
 * Escalabilidad: denota la facilidad de aumentar las capacidades de cómputo de la aplicación, existen dos formas de aumentar escalabilidad, escalabilidad vertical y horizontal.
 > * La escalabilidad vertical implica el aumento de capacidades por medio del aumento de hardware involucrado en el cómputo de la aplicación, la cual para el caso particular debiese ser posible debido a la naturaleza de las herramientas utilizadas, que pueden aprovechar un aumento en la plataformas físicas.
 > * La escalabilidad horizontal es el segundo tipo de escalabilidad e implica la integración de varios servidores trabajando en conjunto, lo cual no es posible con la configuración actual de la aplicación, la cual realiza las consultas por medio de urls específicas a módulos exclusivos dentro de la aplicación. Esto puede cambiar al añadir un gestor de carga que administre la comunicación de los mensajes entre módulos.
+
+## Listado de caracterísitcas a implementar:
+A continuación se listan las características de un sistema distribuido que no se cumplieron en la entrega anterior: 
+* Disponibilidad de recursos: se requiere un método para ordenar recursos.
+* Escalabilidad: se requiere de un método para ordenar recursos, o bien implementar una estructura que facilite escalabilidad horizontal.
+* Transparencia:
+> * Transparencia de ubicación: se requiere de algún sistema de gestión de base de datos para organizar recursos.
+> * Transparencia de migración: se requiere de al menos una copia adicional de la base de datos como contingencia ante cambios.
+> * Transparencia de reubicación: se requiere de al menos una copia adicional de la base de datos como contingencia ante reubicación.
+> * Transparencia de replicación: se requiere de al menos una copia adicional de la base de datos para considerar replicación.
+> * Transparencia de fallos: se requiere de algún sistema de gestión de recursos para reiniciar procesos detenidos debido a fallas.
+> * Transparencia de persistencia: se requiere de algún sistema de gestión de recursos para reiniciar procesos detenidos debido a fallas.
+
+## Propuesta final implementada:
+Se propone implementar un sistema de contendores con Docker, de modo de separar la aplicación de las bases de datos, de modo de poder replicar contenedores con los recursos que se requieran en el futuro, y así poder satisfacer la demanda de recursos del sistema, siempre y cuando existan suficientes máquinas físicas que puedan hacer funcionar a todos los contenedores. 
+
+Para replicar la base de datos se opta por generar copias esclavas, de modo que la base de datos copiada y la original se encuentran en contenedores separados, las cuales pueden ser invocadas en caso de caida o sobrecupo de la base de datos original, de este modo se mantiene la *transparencia de persistencia* ya que se puede recuperar el acceso a información si una de las bases de datos no se encuentra disponible.
+
+## Pipeline
+![Pipeline Propuesta Final](/images/pipeline.png)
+
+## Conclusiones
+Se entrega un sistema funcional que realiza las actividades básicas del sistema Comisaría Virtual. Dicho sistema cumple de forma las cualidades generales de un sistema distribuido, adicionalmente dichos cambios pueden ser mejorados agregando un mayor número de contenedores, agregando programas de control de carga, o agregando otras bases de datos.  
