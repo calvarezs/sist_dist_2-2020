@@ -78,7 +78,7 @@ router.post('/add', [
         console.log(person)
         if(person==null){
             console.log("Se va a agregar una persona que no esta registrada!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            add(myData);
+            await add(myData);
         }
         const permission = await Permission.create({rut, motivo, adress})
         if (permission) {
